@@ -232,6 +232,7 @@ el.appendChild(span);
 
     addEventListener("mousemove", e => {
       x = e.clientX; y = e.clientY;
+      cur.style.transform = `translate3d(${x}px, ${y}px, 0)`;  // move immediately, not one frame later
       if (!visible) { cur.style.display = "block"; visible = true; }
       const t = e.target;
       const overLink = t.closest &&
@@ -248,7 +249,6 @@ el.appendChild(span);
         frame = (frame + 1) % 30; last = ts;
         cur.style.backgroundPosition = -frame * 48 + "px 0";
       }
-      cur.style.transform = `translate(${x}px, ${y}px)`;
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);

@@ -88,7 +88,8 @@ goTo(screen) {
   /* ---------- Screen data loading ---------- */
   async loadProjects() {
     View.renderFeatured(Model.featured);
-    if (Model.state.reposLoaded) return;
+    // GitHub repo feed removed from the page (no #repo-grid), so stop here
+    if (!View.els.repoGrid || Model.state.reposLoaded) return;
     const { repos, live } = await Model.fetchRepos();
     const status = live
       ? `${repos.length} repositories · live from GitHub`

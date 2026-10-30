@@ -21,26 +21,19 @@ const Model = {
   // ---- Featured projects (hand-written, shown above the GitHub feed) ----
   featured: [
     {
-      title: "7th SEMESTER PROJECT",
-      tag: "Live App", color: "#3dc8ff", live: true,
-      url: "https://github.com/Numal400/7th_Semester_Project.git", cta: "View on GitHub →",
+      title: "TWITTER MICHELIN",
+      tag: "맛집", color: "#3dc8ff", live: true,
+      url: "https://twitter-michelin.web.app/", cta: "Visit site →",
       img: "assets/projects/bsl.png",
-      desc: "PROJECT FOR ECE",
+      desc: "훠궈소스도 찾자",
     },
     {
-      title: "OSCILLOSCOPE",
-      tag: "NLP", color: "#0064e6",
-      url: "https://github.com/Numal400/oscilloscope.git",
-      cta: "View on GitHub →",
+      title: "NOVEL CALENDAR",
+      tag: "Ridibooks", color: "#0064e6",
+      url: "https://www.novel-calendar.com/markdown",
+      cta: "Visit site →",
       img: "assets/projects/steam.png",
-      desc: "Code for digital Oscilloscope on Raspberry Pi5",
-    },
-    {
-      title: "IMPORTANT PAGE",
-      tag: "Security", color: "#f1e05a",
-      url: "https://github.com/Numal400/ImportantByNumal-page.git", cta: "View on GitHub →",
-      img: "assets/projects/downloadguard.png",
-      desc: "Just a page",
+      desc: "이거 없으면 개손해",
     },
   ],
 
@@ -89,6 +82,9 @@ const Model = {
 
   // ---- Skills screen ----
   skills: [
+    /* SKILLS는 일단 비워둠 — 아래 예시 형식으로 채우면 됩니다 */
+  ],
+  skillsExample: [
     { group: "AI · ML", items: [
       ["Python · Java · C++", 50], ["Chat GPT", 88],
       ["Gemini", 86], ["Meshy AI", 85],
