@@ -11,6 +11,7 @@ const Controller = {
   View.init();
   this.bindMenu();
   this.bindKeyboard();
+  this.bindHistory();
   this.bindAudioUnlock();
   this.bindAudioButton();
   this.bindContactForm();
@@ -61,9 +62,11 @@ const Controller = {
   },
 
   /* ---------- Navigation ---------- */
-goTo(screen) { 
-  if (this.transitioning || screen === Model.state.screen) return; 
-  this.transitioning = true; 
+goTo(screen, fromPop = false) {
+  if (this.transitioning || screen === Model.state.screen) return;
+  // Each sub-screen gets a history entry so the phone's back button acts like ESC
+  if (!fromPop && screen !== "home") history.pushState({ sub: true, screen }, "");
+  this.transitioning = true;
   this.play(); 
 
   View.wipe( 
@@ -75,6 +78,19 @@ goTo(screen) {
       },
       () => { this.transitioning = false; }
     );
+  },
+
+  // Back to home from a sub-screen: pop the history entry so the browser stays in sync
+  back() {
+    if (history.state && history.state.sub) history.back();
+    else this.goTo("home");
+  },
+
+  bindHistory() {
+    addEventListener("popstate", e => {
+      const s = e.state;
+      this.goTo(s && s.sub ? s.screen : "home", true);
+    });
   },
 
   select(index) {
@@ -157,11 +173,11 @@ goTo(screen) {
     });
 
     document.querySelectorAll("[data-back]").forEach(b =>
-      b.addEventListener("click", () => this.goTo("home")));
+      b.addEventListener("click", () => this.back()));
 
     // Clicking the name always takes you home
     document.getElementById("big-name").addEventListener("click", () => {
-      if (Model.state.screen !== "home") this.goTo("home");
+      if (Model.state.screen !== "home") this.back();
       else this.play();
     });
   },
@@ -175,7 +191,7 @@ goTo(screen) {
           this.goTo(View.els.menuItems[Model.state.menuIndex].dataset.target);
         }
       } else if (e.key === "Escape") {
-        this.goTo("home");
+        this.back();
       }
     });
   },
